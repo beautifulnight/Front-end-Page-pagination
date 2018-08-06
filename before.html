@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.min.js"></script>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" /> 
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+
+<body background="http://imgsrc.baidu.com/image/c0%3Dshijue1%2C0%2C0%2C294%2C40/sign=c142a7311bdfa9ece9235e540ab99d76/8b13632762d0f703a21e50f102fa513d2697c56b.jpg">
+    
+    <div class="top">
+        <h1>NBA球星集(部分) </h1>
+    </div>
+
+    <div class="content" >
+
+          
+
+
+
+    </div>
+    <div class="footer">
+        <div class="page" style="text-align:center">
+            <!--<button id="previous" onclick="show(--cur_Page); judge_first(cur_Page); judge_last(cur_Page)" >上一页</button>-->
+            <!--<button id="first"  onclick="show(1); judge_first(cur_Page); judge_last(cur_Page)" >1</button>
+            <button id="second" onclick="show(2); judge_first(cur_Page); judge_last(cur_Page)" >2</button>
+            <button id="third" onclick="show(3); judge_first(cur_Page); judge_last(cur_Page)" >3</button>-->
+            <!--<button id="next" onclick="show(++cur_Page); judge_first(cur_Page); judge_last(cur_Page)" >下一页</button>-->
+        </div>
+
+    </div>
+
+    <script>
+
+        var list = [{ name: '林书豪', pos: '司职控球后卫', img_src: 'http://pic19.nipic.com/20120316/8279160_102351587138_2.jpg', href: 'https://baike.baidu.com/item/%E6%9E%97%E4%B9%A6%E8%B1%AA/6363050?fr=aladdin', alt: 'Jeremy Lin' },
+        { name: '科比', pos: '司职得分后卫', img_src: 'http://09.imgmini.eastday.com/mobile/20170913/20170913175526_4d7e5a0e566cd8afc43ca7bb5436c463_2.jpeg', href: 'https://baike.baidu.com/item/%E7%A7%91%E6%AF%94%C2%B7%E5%B8%83%E8%8E%B1%E6%81%A9%E7%89%B9/318773?fromtitle=%E7%A7%91%E6%AF%94&fromid=133066&fr=aladdin', alt: 'Kobe Bryant' },
+        { name: '詹姆斯', pos: '司职小前锋后卫', img_src: 'http://09img.shaqm.com/mobile/20180502/20180502131156_4f93289773c06cd2179edf611375bce6_2.jpeg', href: 'https://baike.baidu.com/item/%E5%8B%92%E5%B8%83%E6%9C%97%C2%B7%E8%A9%B9%E5%A7%86%E6%96%AF/1989503?fromtitle=%E8%A9%B9%E5%A7%86%E6%96%AF&fromid=14189565&fr=aladdin', alt: 'LeBron James' },
+        { name: '杜兰特', pos: '司职小前锋', img_src: 'http://china.nba.com/media/img/players/head/260x190/201142.png', href: 'https://baike.baidu.com/item/%E5%87%AF%E6%96%87%C2%B7%E6%9D%9C%E5%85%B0%E7%89%B9/3726277?fromtitle=%E6%9D%9C%E5%85%B0%E7%89%B9&fromid=3171153&fr=aladdin', alt: 'Stephen Durant' },
+        { name: '库里', pos: '司职控球后卫', img_src: 'http://china.nba.com/media/img/players/head/260x190/201939.png', href: 'https://baike.baidu.com/item/%E6%96%AF%E8%92%82%E8%8A%AC%C2%B7%E5%BA%93%E9%87%8C/902812?fromtitle=%E5%BA%93%E9%87%8C&fromid=8916710&fr=aladdin', alt: 'Stephen Curry' },
+        { name: '欧文', pos: '司职控球后卫', img_src: 'http://china.nba.com/media/img/players/head/260x190/202681.png', href: 'https://baike.baidu.com/item/%E5%87%AF%E9%87%8C%C2%B7%E6%AC%A7%E6%96%87/4796186?fromtitle=%E6%AC%A7%E6%96%87&fromid=8732990', alt: 'Kyrie Irving' },
+        { name: '哈登', pos: '司职得分后卫', img_src: 'http://c.hiphotos.baidu.com/baike/pic/item/a71ea8d3fd1f413425b7c7932e1f95cad0c85e5f.jpg', href: 'https://baike.baidu.com/item/%E8%A9%B9%E5%A7%86%E6%96%AF%C2%B7%E5%93%88%E7%99%BB/745489?fromtitle=%E5%93%88%E7%99%BB&fromid=20224351', alt: 'James Harden' },
+        { name: '保罗', pos: '司职控球后卫', img_src: 'http://05.imgmini.eastday.com/mobile/20171226/20171226140822_ffdc2a76751de0b1eae1cc57a3d7210b_1.jpeg', href: 'https://baike.baidu.com/item/%E5%85%8B%E9%87%8C%E6%96%AF%C2%B7%E4%BF%9D%E7%BD%97/967371?fromtitle=%E4%BF%9D%E7%BD%97&fromid=10836016', alt: 'Chris Paul' },
+        { name: '威斯布鲁克', pos: '司职控球后卫', img_src: 'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=a7c49053bf19ebc4c078719fba1da8c1/37d12f2eb9389b5091374f648935e5dde7116e38.jpg', href: 'https://baike.baidu.com/item/%E6%8B%89%E5%A1%9E%E5%B0%94%C2%B7%E5%A8%81%E6%96%AF%E5%B8%83%E9%B2%81%E5%85%8B/3900582?fromtitle=%E7%BB%B4%E6%96%AF%E5%B8%83%E9%B2%81%E5%85%8B&fromid=8612530', alt: 'Russell Westbrook' },
+        { name: '乔丹', pos: '司职得分后卫', img_src: 'https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=a6d06a6e376d55fbc5c6712055192877/a686c9177f3e6709497a434f31c79f3df8dc5503.jpg', href: 'https://baike.baidu.com/item/%E8%BF%88%E5%85%8B%E5%B0%94%C2%B7%E4%B9%94%E4%B8%B9/21768?fromtitle=%E4%B9%94%E4%B8%B9&fromid=30699', alt: 'Michael Jordan' },
+        { name: '皮蓬', pos: '司职小前锋', img_src: 'https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=c22a69f48acb39dbc1c06050e82d6e19/342ac65c10385343e41c8a3f9813b07ecb8088d8.jpg', href: 'https://baike.baidu.com/item/%E6%96%AF%E7%A7%91%E8%92%82%C2%B7%E7%9A%AE%E8%93%AC?fromtitle=%E7%9A%AE%E8%93%AC&fromid=973040', alt: 'Scottie Pippen' },
+        { name: '佩顿', pos: '司职控球后卫', img_src: 'https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=3e70d5e3b40e7bec23da04e71715de05/4b90f603738da9773e6347c7bc51f8198718e38a.jpg', href: 'https://baike.baidu.com/item/%E5%8A%A0%E9%87%8C%C2%B7%E4%BD%A9%E9%A1%BF?fromtitle=%E4%BD%A9%E9%A1%BF&fromid=10638301', alt:'Gary Payton'},
+        { name: '魔术师约翰逊', pos: '司职控球后卫', img_src: 'https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=bba2ca4ffa03738dde4a0b248b20d76c/77c6a7efce1b9d16ff592f8effdeb48f8d546446.jpg', href: 'https://baike.baidu.com/item/%E5%9F%83%E5%B0%94%E6%96%87%C2%B7%E7%BA%A6%E7%BF%B0%E9%80%8A/2954608', alt:'Earvin Johnson' },
+        { name: '卡尔·马龙', pos: '司职大前锋', img_src: 'https://gss1.bdstatic.com/9vo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=054a3f833da85edffa8cf925716f6e1e/03087bf40ad162d94ba834cf18dfa9ec8b13cd9b.jpg', href: 'https://baike.baidu.com/item/%E5%8D%A1%E5%B0%94%C2%B7%E9%A9%AC%E9%BE%99?fromtitle=%E5%8D%A1%E5%B0%94%E9%A9%AC%E9%BE%99&fromid=10971387', alt: 'Karl Malone' },
+        { name: '恩比德', pos: '司职中锋', img_src: 'http://china.nba.com/media/img/players/head/260x190/203954.png', href: 'https://baike.baidu.com/item/%E4%B9%94%E5%B0%94%C2%B7%E6%81%A9%E6%AF%94%E5%BE%B7', alt: 'Joel Embiid' },
+        { name: '塔图姆', pos: '司职小前锋', img_src: 'https://gss3.bdstatic.com/7Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=cf5244c1933df8dca63d8897f52a15b6/f7246b600c3387445465654a5d0fd9f9d72aa060.jpg', href: 'https://baike.baidu.com/item/%E6%9D%B0%E6%A3%AE%C2%B7%E5%A1%94%E5%9B%BE%E5%A7%86/14924018', alt: 'Jayson Tatum' },
+        { name: '西蒙斯', pos: '司职控球后卫', img_src: 'https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=c498d86139fae6cd0cb4ac6737886819/64380cd7912397ddf2f7a1525582b2b7d1a287dd.jpg', href: 'https://baike.baidu.com/item/%E6%9C%AC%C2%B7%E8%A5%BF%E8%92%99%E6%96%AF/14937870?fr=aladdin', alt: 'Ben Simmons' }];
+        
+        var cur_Page = 1; //set the number of current page
+        var num_per_page = 8; //set the number of the blocks of one page
+        var num = list.length;
+        var num_page = (num % num_per_page === 0) ? (Math.round(num / num_per_page)) : (Math.round(num / num_per_page) + 1);
+        window.onload = function () {
+ 
+            for (var i = 0; i < num; i++) {
+                var d = document.createElement("div");
+                var content = document.getElementsByClassName("content");
+                content[0].appendChild(d);
+                d.className="block";
+                d.style.float= "left";
+                var h = document.createElement("h2");
+                var p = document.createElement("p");
+                var a = document.createElement("a");
+                var img_ = document.createElement("img");
+                img_.scr = list[i].img_src;
+                d.appendChild(h);
+                d.appendChild(p);
+                d.appendChild(a);
+                a.appendChild(img_);
+                h.innerHTML=list[i].name;
+                p.innerHTML=list[i].pos;
+                a.href = list[i].href;
+                a.target = "_blank";
+                img_.src = list[i].img_src;
+                img_.width = 200;
+                img_.height = 200;
+                img_.alt = list[i].alt;
+            }
+            if (num_page > 1) {
+                var foot_ = document.getElementsByClassName("page");
+                var but = document.createElement("input");
+                but.type = 'button';
+                but.value ='上一页';
+                but.className = 'previous';
+                but.setAttribute('num', 1);
+                foot_[0].appendChild(but);
+            }
+            
+            var test=0 ;
+            for (var j = 0; j < num_page; j++) {
+                var foot_ = document.getElementsByClassName("page");
+                var but = document.createElement("input");
+                but.type = 'button';
+                but.value = j + 1;
+                but.className = j + 1;
+                foot_[0].appendChild(but);              
+            }
+
+            if (num_page > 1) {
+                var but = document.createElement("input");
+                but.type = 'button';
+                but.value = '下一页';
+                but.className = 'next';
+                foot_[0].appendChild(but);
+            }
+            
+            var buts = document.getElementsByTagName('input');
+            for (var i = 1; i < buts.length-1; i++) {
+                buts[i].setAttribute('num', buts[i].value);
+                buts[i].onclick = function () {
+                    show(this.getAttribute('num')); judge_first(); judge_last(); console.log('cur_Page after click buttons '+cur_Page);
+                }
+            }
+
+            for (var i = 0; i < list.length; i++) {
+                if (i < num_per_page)
+                    x[i].style.display = "";
+                else
+                    x[i].style.display = "none";
+            }
+            var pre = document.getElementsByClassName('previous');
+            pre[0].onclick = function () {
+                if (cur_Page !== 1)
+                    show(--cur_Page);
+                judge_first(); judge_last(); console.log('cur_Page after click previous ' + cur_Page);
+            }
+            var next = document.getElementsByClassName('next')
+                next[0].onclick = function () {
+                if (cur_Page !== num_page)
+                    show(++cur_Page);
+                judge_first(); judge_last(); console.log('cur_Page after click next ' + cur_Page);
+            }
+            judge_first();
+            judge_last();
+        }
+
+
+        var section = document.getElementsByClassName("block");
+       
+        var x = document.getElementsByClassName("block");
+        console.log('num_page'+num_page);
+
+
+
+    function $(id) {
+        return document.getElementsById(id);
+    }
+
+    function judge_first() {
+        console.log('if first' + cur_Page);
+        if (cur_Page === 1){
+            document.getElementsByClassName('previous')[0].disabled = true;
+        }
+        else {
+            document.getElementsByClassName('previous')[0].disabled = false;
+        }
+    }
+   
+    function judge_last() {
+        console.log('if last' + cur_Page+''+num_page);
+        if (cur_Page === num_page)
+            document.getElementsByClassName("next")[0].disabled=true;
+        else document.getElementsByClassName("next")[0].disabled=false;
+    }
+
+    function show(x) {
+        if (x < 1)
+            x = 1;
+        if (x > num_page)
+            x = num_page;
+        cur_Page = x;
+        for (var i = 0; i < section.length; i++) {
+            if(i>=(x-1)*num_per_page&&i<x*num_per_page)
+                section[i].style.display="";
+            else
+                section[i].style.display = "none";
+        }
+    }
+
+    </script>
+
+</body>
+
+</html>
