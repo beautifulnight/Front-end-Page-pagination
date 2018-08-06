@@ -17,9 +17,6 @@
 
     <div class="content" >
 
-          
-
-
 
     </div>
     <div class="footer">
@@ -128,7 +125,7 @@
             var pre = document.getElementsByClassName('previous');
             pre[0].onclick = function () {
                 if (cur_Page !== 1)
-                    show(--cur_Page);
+                    show(--cur_Page); console.log(cur_Page);
                 judge_first(); judge_last(); console.log('cur_Page after click previous ' + cur_Page);
             }
             var next = document.getElementsByClassName('next')
@@ -155,7 +152,7 @@
 
     function judge_first() {
         console.log('if first' + cur_Page);
-        if (cur_Page === 1){
+        if (Number(cur_Page) === 1){
             document.getElementsByClassName('previous')[0].disabled = true;
         }
         else {
@@ -165,7 +162,7 @@
    
     function judge_last() {
         console.log('if last' + cur_Page+''+num_page);
-        if (cur_Page === num_page)
+        if (Number(cur_Page) === num_page)
             document.getElementsByClassName("next")[0].disabled=true;
         else document.getElementsByClassName("next")[0].disabled=false;
     }
